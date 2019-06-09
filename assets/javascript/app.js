@@ -19,21 +19,21 @@ function displayFoodGifs() {
         // gifDiv.append(response.rating);
 
         for (var i = 0; i < response.data.length; i++) {
-            var giphyPhoto = response.data[i].images.fixed_height_still.url;
-            var newImg = $("<img>");
-            newImg.attr("src", giphyPhoto);
-            $("#gif-view").prepend(newImg);
-            var rating = response.data[i].rating;
-            $("#gif-view").prepend("Rated: " + rating)
+            // var giphyPhoto = response.data[i].images.fixed_height_still.url;
+            // var newImg = $("<img>");
+            // newImg.attr("src", giphyPhoto);
+            // $("#gif-view").prepend(newImg);
+            // var rating = response.data[i].rating;
+            // $("#gif-view").prepend("Rated: " + rating)
+            var gifDiv = $("<div>");
+            gifDiv.append(
+              $("<p>").text("Rated: " + response.data[i].rating),
+              $("<img>").attr("src", response.data[i].images.fixed_height_still.url)
+            )
+            
+            $("#gif-view").prepend(gifDiv);
         }
         
-        // var gifDiv = $("<div>");
-        // gifDiv.append(
-        //   $("<p>").text("Rated: " + response.data[0].rating),
-        //   $("<img>").attr("src" + response.data[0].images.fixed_height.url)
-        // )
-        
-        // $("#gif-view").prepend(gifDiv);
     })
 }
 displayFoodGifs();
