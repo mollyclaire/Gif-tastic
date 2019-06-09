@@ -1,5 +1,6 @@
 h2 {
     padding-top: 30px;
+    font-family: 'Courier New', Courier, monospace
 }
 
 #search-box {
@@ -16,7 +17,7 @@ h2 {
     padding: 25px;
 }
 
-.food {
+.new {
     margin: 5px;
 }
 

@@ -1,11 +1,11 @@
 $(document).ready(function () {
     // Initial array
-    var foodList = ["kale", "sushi", "coffee", "rose", "avocado", "tofu", "kombucha", "taco", "cocktail", "macaron"];
+    var charList = ["Michael", "Dwight", "Jim", "Creed", "Oscar", "Kevin", "Andy", "Stanley", "Deangelo", "Kelly"];
 
     // Function for rendering the HTML to display the appropriate content
-    function displayFoodGifs() {
-        var food = $(this).attr("data-name");
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + food + "&api_key=54LeYFO9lvGP5gxdBJg5XsqmFnCFwb38&limit=10"
+    function displayGifs() {
+        var char = $(this).attr("data-name");
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=the+office+" + char + "&api_key=54LeYFO9lvGP5gxdBJg5XsqmFnCFwb38&limit=10"
         
         // Creates AJAX call for the specific food button being clicked
         $.ajax({
@@ -32,7 +32,7 @@ $(document).ready(function () {
         })
     }
    
-    displayFoodGifs();
+    displayGifs();
     
 
     // Function for displaying buttons
@@ -42,14 +42,14 @@ $(document).ready(function () {
         $("#buttons-view").empty();
 
         // Looping through the array of food and generating buttons for each
-        for (var i = 0; i < foodList.length; i++) {
+        for (var i = 0; i < charList.length; i++) {
             var a = $("<button>");
             // Adding a class
-            a.addClass("food");
+            a.addClass("new");
             // Adding a data-attribute with a value of the type of food
-            a.attr("data-name", foodList[i]);
+            a.attr("data-name", charList[i]);
             // Adding the button's text 
-            a.text(foodList[i]);
+            a.text(charList[i]);
             // Adding the button to the HTML
             $("#buttons-view").append(a);
         }
@@ -58,14 +58,14 @@ $(document).ready(function () {
     // Function for clicking the "submit" button
     $("#add-gif").on("click", function (event) {
         event.preventDefault();
-        var foodText = $("#food-input").val().trim();
-        foodList.push(foodText);
+        var userText = $("#user-input").val().trim();
+        charList.push(userText);
         renderButtons();
     })
     renderButtons();
 
     // Function for clicking on any button with the class of food
-    $(document).on("click", ".food", displayFoodGifs);
+    $(document).on("click", ".new", displayGifs);
     renderButtons();
 
 
