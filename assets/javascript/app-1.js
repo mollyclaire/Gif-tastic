@@ -15,11 +15,13 @@ $(document).ready(function () {
             console.log(response);
             // Looping through each set of data
             for (var i = 0; i < response.data.length; i++) {
-                // Renders the rating and gif image on the page
+                // Creates new variables for newly rendered gifs and ratings
                 var gifDiv = $("<div>");
                 var newImage = $("<img>");
+                // Assigns new attribute to the data-state, so the image can animate when clicked
                 newImage.attr("data-state", "animate");
                 newImage.attr("data-animate", response.data[i].images.fixed_height.url)
+                // Assigns new attirbute to the data-state, so the image can return to an image when clicked again
                 newImage.attr("data-state", "still");
                 newImage.attr("data-still", response.data[i].images.fixed_height_still.url)
                 gifDiv.append(
@@ -35,7 +37,6 @@ $(document).ready(function () {
    
     displayGifs();
     
-
     // Function for displaying buttons
     function renderButtons() {
 
@@ -69,7 +70,7 @@ $(document).ready(function () {
     $(document).on("click", ".new", displayGifs);
     renderButtons();
 
-    // If an image is clicked, it will animate -- NEED HELP HERE
+    // Function for clicking an image to make it both animate and stop again
     $(document).on("click", "img", function(event) {
         var state = $(this).attr("data-state");
         if (state === "still") {

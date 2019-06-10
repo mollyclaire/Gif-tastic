@@ -20,18 +20,18 @@
         <div class="col-md-12">
             <!-- Search box and submit button -->
             <form id="search-box">
-                <label for="food-input">Add your favorite The Office character!<br /></label>
+                <label for="food-input">Add your favorite The Office character!</label><br />
                 <input type="text" id="user-input">
-                <input id="add-gif" type="submit" value="Submit">
+                <input id="add-gif" type="submit" value="Add">
             </form>
         </div>
     </div> 
-    <div class="row">
-        <div class="col-md-8">
+    <div class="row flex-column-reverse flex-sm-row">
+        <div class="col-md-8 col-sm-12">
             <!-- Gifs will get dumped here -->
             <div id="gif-view"></div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 col-sm-12" id="top">
             <!-- Rendered buttons will get dumped here -->
             <div id="buttons-view"></div>
         </div>
