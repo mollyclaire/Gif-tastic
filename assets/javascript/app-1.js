@@ -7,7 +7,7 @@ $(document).ready(function () {
         var char = $(this).attr("data-name");
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=the+office+" + char + "&api_key=54LeYFO9lvGP5gxdBJg5XsqmFnCFwb38&limit=10"
         
-        // Creates AJAX call for the specific food button being clicked
+        // Creates AJAX call for the specific button being clicked
         $.ajax({
             url: queryURL,
             method: "GET"
@@ -18,17 +18,18 @@ $(document).ready(function () {
                 // Renders the rating and gif image on the page
                 var gifDiv = $("<div>");
                 var newImage = $("<img>");
-                newImage.addClass("still");
+                newImage.attr("data-state", "animate");
+                newImage.attr("data-animate", response.data[i].images.fixed_height.url)
+                newImage.attr("data-state", "still");
+                newImage.attr("data-still", response.data[i].images.fixed_height_still.url)
                 gifDiv.append(
                     $("<p>").text("Rated: " + response.data[i].rating),
                     newImage.attr("src", response.data[i].images.fixed_height_still.url)
                 )
                 $("#gif-view").prepend(gifDiv);
             }
-            // If an image with a class of still is clicked, it will animate -- NEED HELP HERE
-            $("#still").on("click", function () {
-                $("#still").attr("src", response.data.images.fixed_height.url)
-            })
+            
+            
         })
     }
    
@@ -38,15 +39,15 @@ $(document).ready(function () {
     // Function for displaying buttons
     function renderButtons() {
 
-        // Deleting the movie buttons prior to adding new movie buttons
+        // Deleting the character buttons prior to adding new character buttons
         $("#buttons-view").empty();
 
-        // Looping through the array of food and generating buttons for each
+        // Looping through the array of characters and generating buttons for each
         for (var i = 0; i < charList.length; i++) {
             var a = $("<button>");
             // Adding a class
             a.addClass("new");
-            // Adding a data-attribute with a value of the type of food
+            // Adding a data-attribute 
             a.attr("data-name", charList[i]);
             // Adding the button's text 
             a.text(charList[i]);
@@ -64,9 +65,20 @@ $(document).ready(function () {
     })
     renderButtons();
 
-    // Function for clicking on any button with the class of food
+    // Function for clicking on any button with the class of new
     $(document).on("click", ".new", displayGifs);
     renderButtons();
 
-
+    // If an image is clicked, it will animate -- NEED HELP HERE
+    $(document).on("click", "img", function(event) {
+        var state = $(this).attr("data-state");
+        if (state === "still") {
+            $(this).attr("src", $(this).attr("data-animate"));
+            $(this).attr("data-state", "animate");
+            // $(this).attr("src", $(this).attr("data-animate")); 
+        } else if (state === "animate") {
+            $(this).attr("src", $(this).attr("data-still"));
+            $(this).attr("data-state", "still");
+        }
+    })
 })
